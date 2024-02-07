@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
 // import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -19,10 +19,6 @@ let firebase_app = getApps().length === 0 ? initializeApp(firebaseConfig) : getA
 
 // export default firebase_app;
 
-// export const auth = getAuth(firebase_app);
-
-// export const googleProvider = new GoogleAuthProvider();
-
-export const db = getFirestore(firebase_app);
-
-export const storage = getStorage(firebase_app);
+export const db = initializeFirestore(firebase_app, {
+  experimentalForceLongPolling: true,
+});
